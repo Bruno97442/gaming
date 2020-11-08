@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Pendu</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container-md container">
+        <main class="Pendu row no-gutter justify-content-between shadow rounded">
+            <div class="penduBox col-12 col-sm-5">
+                <h1>Pendu</h1>
+                <div class="mot">
+                    <button class="btn jouer btn-danger">Jouer !</button>
+                    <form action="" id="entreMot">
+                        <div class="form-group">
+                            <label for="motCache">Écrire un mot ci-dessous !</label>
+                            <input type="password" class="form-control" name="motCache" id="motCache"
+                                placeholder="clique ici :)">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
+                    <p class="msg interface"></p>
+
+                    <form action="" id="entreLettre">
+                        <div class="form-group">
+                            <label for="strLS">Une lettre</label>
+                            <input type="text" maxlength="1" name="strLS" id="strLS" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                        <p class="msg erreurs text-danger"></p>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="penduBox col-12 col-sm-5">
+
+                <span class="poutre h anim o4"></span>
+                <span class="poutre b anim o2"></span>
+                <span class="poutre g anim o3"></span>
+                <span class="poutre diag anim o5"></span>
+                <span class="tabouret anim o7 pre-o8 pre-o10"></span>
+                <span class="corde anim o6 pre-o8">
+                    <span class="c"></span>
+                    <span class="n"></span>
+                </span>
+                <div class="homme display-inline anim o1 pre-o8 pre-o10">
+                    <div class="msg bulle anim o9 pre-o10" role="alert">
+                        <strong>Sauvez-moi !!!</strong>
+                        <strong>...</strong>
+                    </div>
+                    <p class="msg bulle res"></p>
+                    <span class="m c">
+                        <span class="m b d"></span>
+                        <span class="m b g"></span>
+                    </span>
+                    <span class="m j g"></span>
+                    <span class="m j d"></span>
+                    <span class="m tete"></span>
+                </div>
+            </div>
+
+    </div>
+    </main>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script defer src="script.js"></script>
+</body>
+
+</html>

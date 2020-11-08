@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>les bâtonnées</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+
+	<body>
+
+		<main class="batonnee">
+			<h1>Les bâtonnées
+				<a href="sb3.html">sb3</a>
+			</h1>
+			<div class="ifj1">
+				<h2>joueur1</h2>
+				<p class="score">score :
+					<strong>0</strong>
+				</p>
+			</div>
+			<div class="ifj2">
+				<h2>joueur2</h2>
+				<p class="score">score :
+					<strong>0</strong>
+				</p>
+			</div>
+			<button type="button" class="commencer btn btn-primary btn-lg">Commencer</button>
+			<section class="plateforme"></section>
+			<section class="initialiseur">
+				<form class="form initForm">
+					<div class="form-group">
+						<label for="nbBatons">nombre de bâtons</label>
+						<input type="number" value="20" class="form-control form-control-lg" name="nbBatons" id="nbBatons" aria-describedby="descNbBatons">
+						<small id="descNbBatons" class="form-text text-muted"></small>
+					</div>
+					<div class="form-group">
+						<label for="pioche">Pioche</label>
+						<input type="text" value="1,2,3" class="form-control form-control-lg" name="pioche" id="pioche" aria-describedby="descPioche">
+						<small id="descPioche" class="form-text text-muted"></small>
+					</div>
+					<div class="form-group">
+						<label for="nomJoueur">Joueur</label>
+						<input type="text" value="Joueur" class="form-control form-control-lg" name="nomJoueur" id="nomJoueur" aria-describedby="descNomJoueur">
+						<small id="descNomJoueur" class="form-text text-muted"></small>
+					</div>
+					<div class="form-group">
+						<label for="nomJoueur">Joueur2</label>
+						<input type="text" class="form-control form-control-lg" name="nomJoueur2" id="nomJoueur2" aria-describedby="descNomJoueur2">
+						<small id="descNomJoueur2" class="form-text text-muted"></small>
+					</div>
+
+					<label class="custom-control custom-checkbox">
+						<input type="checkbox" checked name="ia" id="ia" class="custom-control-input">
+						<span class="custom-control-indicator">contre l'algo</span>
+					</label>
+					<label class="custom-control custom-checkbox">
+						<input type="checkbox" name="_3d" class="custom-control-input">
+						<span class="custom-control-indicator">La 3D de fou</span>
+					</label>
+					<button type="submit" class="btn btn-primary">Démarrer</button>
+				</form>
+			</section>
+			<aside class="info d-none">
+				<button class="btn btn-warning btn-lg">Structure</button>
+				<h2 class="note">Construction des Classes</h2>
+				<section class="entite ent1">
+					<h3>JeuxDesBatons</h3>
+					<h4>Propriétés</h4>
+					<ul class="properties">
+						<li>joueurs</li>
+						<li>tour</li>
+						<li>batons</li>
+						<li>template</li>
+						<li>...DOMaccess</li>
+					</ul>
+					<h4>Méthodes</h4>
+					<ul class="methods">
+						<li>init()</li>
+						<li>commencer()</li>
+						<li>docSlt()</li>
+						<li>changeTour()</li>
+						<li>resulter()</li>
+					</ul>
+				</section>
+				<section class="entite ent2">
+					<h3>Joueur</h3>
+					<h4>Propriétés</h4>
+					<ul class="properties">
+						<li>nom</li>
+						<li>score</li>
+					</ul>
+					<h4>Méthodes</h4>
+					<ul class="methods">
+						<li>retirer()</li>
+						<li></li>
+					</ul>
+				</section>
+				<section class="entite ent3">
+					<h3></h3>
+					<h4>Propriétés</h4>
+					<ul class="properties">
+						<li></li>
+						<li></li>
+					</ul>
+					<h4>Méthodes</h4>
+					<ul class="methods">
+						<li></li>
+						<li></li>
+					</ul>
+				</section>
+				<section class="entite ent4">
+					<h3></h3>
+					<h4>Propriétés</h4>
+					<ul class="properties">
+						<li></li>
+						<li></li>
+					</ul>
+					<h4>Méthodes</h4>
+					<ul class="methods">
+						<li></li>
+						<li></li>
+					</ul>
+				</section>
+			</aside>
+		</main>
+		<!-- robot beginning -->
+		<div class="rocket r1">
+			<div class="lead"></div>
+			<div class="main"></div>
+			<div class="tail"></div>
+			<div class="blast"></div>
+			<div class="blast2"></div>
+		</div>
+		<div class="rocket r2">
+			<div class="lead"></div>
+			<div class="main"></div>
+			<div class="tail"></div>
+			<div class="blast"></div>
+			<div class="blast2"></div>
+
+		</div>
+
+		<div class="robot">
+			<div class="head">
+				<div class="eyes">
+					<div class="eye">
+						<div class="retina"></div>
+					</div>
+					<div class="eye">
+						<div class="retina"></div>
+					</div>
+					<div class="mouth">
+						<div class="speak"></div>
+					</div>
+				</div>
+			</div>
+			<div class="body"></div>
+		</div>
+		<div class="tl click" style="cursor:pointer; position: absolute; top: 0;left: 0; margin:3em">ici</div>
+		<div class="tr click" style="cursor:pointer; position: absolute; top: 0;right: 0; margin:3em">ici</div>
+		<div class="bl click" style="cursor:pointer; position: absolute; bottom: 0;left: 0; margin:3em">ici</div>
+		<div class="br click" style="cursor:pointer; position: absolute; bottom: 0;right: 0; margin:3em">ici</div>
+		<!-- robot end -->
+	</body>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="config.js"></script>
+	<script src="class/surcoucheJQ.js"></script>
+	<script src="class/Robot.js"></script>
+	<script src="class/Joueur.js"></script>
+	<script src="class/IfBatons3d.js"></script>
+	<script src="class/MotionObject.js"></script>
+	<script src="class/JeuxDesBatons.js"></script>
+	<script src="script.js"></script>
+
+</html>

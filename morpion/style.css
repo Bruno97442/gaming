@@ -1,0 +1,203 @@
+:root {
+    --w: 300px;
+    --h: 300px;
+    --rpsw: calc(var(--w) / 3);
+    --rpsh: calc(var(--h) / 3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section#morpion {
+    display: flex;
+    flex-flow: column;
+    gap: 50px;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+section#morpion form, button{
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.466), -1px -1px 10px rgba(0, 0, 0, 0.466), 2px 2px 15px rgba(0, 0, 0, 0.4), -2px -2px 15px  rgba(0, 0, 0, 4);
+    border: none;
+
+}
+
+section#morpion form {
+    width: var(--w);
+    height: var(--h);
+    position: relative;
+   border-radius: 3px;
+   background-image: radial-gradient(white calc(var(--rpsw)/3), black calc(var(--rpsw)) );
+   background-size: var(--rpsw) var(--rpsh);
+   /* overflow: hidden; */
+
+}
+
+section#morpion form .limiteur{
+    position: absolute;
+}
+
+section#morpion form .plateau {
+    height: var(--h);
+    counter-reset: joueur 1;
+    width: 100%;
+    max-width: calc(var(--w) * 2);
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+    
+   
+
+}
+
+section#morpion form .plateau::after{
+    content: counter(joueur, lower-roman);
+    font-size: 1px;
+    letter-spacing: calc(var(--w) - 1px);
+    /* display: block; */
+    font-family: monospace;
+}
+
+section#morpion form .plateau .joueur {
+    width: var(--w);
+    height: var(--h);
+    display: flex;
+    flex-flow: row wrap;
+    top: 0;
+    
+}
+section#morpion form .plateau .joueur.joueur-croix {
+    left: 0;
+}
+
+section#morpion form .plateau .joueur.joueur-rond {
+    /* opacity: 0; */
+    position: absolute;
+    right: 0;
+}
+#morpion form button {
+    position: relative;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 5px;
+    top: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: rgb(230, 222, 222);
+    transition: background-color 0.25s ease;
+
+}
+#morpion form button:hover {
+    background-color: wheat
+}
+
+#morpion form .rps {
+    display: inline-block;
+    position: relative;
+    
+    /* width: var(--rpsw);
+    height: var(--rpsh); */
+}
+
+#morpion form input {
+    position: relative;
+    width: 33.333%;
+    height: 33.333%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+
+#morpion form input:checked + .rps{
+    counter-increment: joueur -2;
+}
+#morpion form input:not(:checked):not(:indeterminate) + .rps{
+    counter-increment: joueur 2;
+}
+#morpion form input + .rps::after {
+    width: var(--rpsw);
+    font-size: calc(var(--rpsw) * 1.3);
+    opacity: 1;
+    position: absolute;
+    bottom: 10%;
+    line-height: var(--rpsh);
+    text-align: center;
+    right: 0;
+    font-family: monospace;
+
+    /* content: "indeterminate"; */
+}
+#morpion form input:checked + .rps::after {
+    content: "×";
+    animation: laGagne 0.3s ease;
+    color: red;
+
+}
+#morpion form input:not(:checked):not(:indeterminate) + .rps::after{
+    content: "o";
+    animation: laGagne 0.3s ease;
+    color: blue;
+
+}
+
+.resultat{
+    position: absolute;
+    width: var(--w);
+    font-size: xx-large;
+    padding: 25px 12px;
+    border-radius: 5px;
+    text-align: center;
+    top: 0;
+    animation: laGagne 1s ease-in;
+    display: none;
+}
+@keyframes laGagne{
+    0%{ opacity: 0; transform: translateY(20%);}
+    100%{ opacity: 1; transform: translateY(0);}
+}
+.joueur-rond .resultat{
+    left: calc(-1 * var(--w) - 110%);
+    background-color: #c3e3ff;
+    
+}
+.joueur-croix .resultat{
+    left: 110%;
+    background-color: lightcoral;
+
+}
+
+/* gestion des matches */
+/* en ligne */
+.joueur-rond input:nth-of-type(1):checked + input:checked + input:checked ~ .resultat,
+.joueur-rond input:nth-of-type(4):checked + input:checked + input:checked ~ .resultat,
+.joueur-rond input:nth-of-type(7):checked + input:checked + input:checked ~ .resultat,
+
+.joueur-rond input:nth-of-type(1):checked ~ input:nth-of-type(4):checked ~ input:nth-of-type(7):checked ~ .resultat,
+.joueur-rond input:nth-of-type(2):checked ~ input:nth-of-type(5):checked ~ input:nth-of-type(8):checked ~ .resultat,
+.joueur-rond input:nth-of-type(3):checked ~ input:nth-of-type(6):checked ~ input:nth-of-type(9):checked ~ .resultat,
+
+.joueur-rond input:nth-of-type(1):checked ~ input:nth-of-type(5):checked ~ input:nth-of-type(9):checked ~ .resultat,
+.joueur-rond input:nth-of-type(3):checked ~ input:nth-of-type(5):checked ~ input:nth-of-type(7):checked ~ .resultat{
+    display: block;
+}
+
+.joueur-croix input:nth-of-type(1):checked ~ input:nth-of-type(2):checked ~ input:nth-of-type(3):checked ~ .resultat,
+.joueur-croix input:nth-of-type(4):checked ~ input:nth-of-type(5):checked ~ input:nth-of-type(6):checked ~ .resultat,
+.joueur-croix input:nth-of-type(7):checked ~ input:nth-of-type(8):checked ~ input:nth-of-type(9):checked ~ .resultat,
+
+.joueur-croix input:nth-of-type(1):checked ~ input:nth-of-type(4):checked ~ input:nth-of-type(7):checked ~ .resultat,
+.joueur-croix input:nth-of-type(2):checked ~ input:nth-of-type(5):checked ~ input:nth-of-type(8):checked ~ .resultat,
+.joueur-croix input:nth-of-type(3):checked ~ input:nth-of-type(6):checked ~ input:nth-of-type(9):checked ~ .resultat,
+
+.joueur-croix input:nth-of-type(1):checked ~ input:nth-of-type(5):checked ~ input:nth-of-type(9):checked ~ .resultat,
+.joueur-croix input:nth-of-type(3):checked ~ input:nth-of-type(5):checked ~ input:nth-of-type(7):checked ~ .resultat{
+    display: block;
+}

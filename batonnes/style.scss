@@ -1,0 +1,219 @@
+$nbSurface: 8;
+:root {
+    --lgBaton: 5em;
+    --milgBaton: calc(var(--lgBaton) / 2);
+    --lBaton: 1em;
+    --diametre: 0.5em;
+    --nbSurface: 8;
+    --bgCSurface: rgb(255, 133, 133);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(85, 85, 85);
+    color: whitesmoke;
+    padding: 2em;
+    overflow: hidden;
+}
+
+@import "style2";
+
+.batonnee {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10% 30% max-content auto;
+    grid-template-areas:
+        "titre titre"
+        "joueur1 joueur2"
+        "btn-commencer btn-commencer"
+        "plateforme plateforme";
+
+    @media screen and (max-width: 400px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 20%) auto;
+        grid-template-areas: "titre" "joueur1" "joueur2" "plateforme";
+    }
+
+    align-items: center;
+    justify-items: center;
+
+    h1 {
+        grid-area: titre;
+    }
+    .ifj1,
+    .ifj2 {
+        background-color: rgba(255, 255, 255, 0.068);
+        padding: 1em;
+        border-radius: 1em;
+        transition: 1s ease;
+        transition: 0.5s;
+        transform: scale(1);
+    }
+    .ifj1 {
+        grid-area: joueur1;
+        &.actif {
+            background-color: rgba(255, 255, 255, 0.199);
+            border: 2px solid red;
+            transform: scale(1.2);
+        }
+    }
+    .ifj2 {
+        grid-area: joueur2;
+        &.actif {
+            background-color: rgba(255, 255, 255, 0.199);
+            border: 2px solid blue;
+            transform: scale(1.2);
+        }
+    }
+
+    button.commencer {
+        grid-area: btn-commencer;
+    }
+    .plateforme {
+        grid-area: plateforme;
+        width: 80%;
+        height: auto;
+    }
+    .batons {
+        position: relative;
+        background-color: teal;
+        height: 100%;
+        padding: 2em;
+        border-radius: 2em;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(1em, 30px));
+        grid-gap: 25px;
+        justify-content: center;
+        transform-style: preserve-3d;
+        transform: perspective(500px) rotateX(20deg);
+        > .baton.flat {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            background-color: red;
+            border-radius: 30px;
+            transition: 1s ease;
+            box-shadow: 0 5px 5px rgb(44, 0, 0), inset 5px 0 5px rgb(255, 196, 196), inset -4px 0 5px rgb(138, 0, 0);
+            transform: translateZ(0px);
+            overflow: hidden;
+            &:hover {
+                transform: translateZ(5px);
+                box-shadow: 0 10px 10px rgb(44, 0, 0), inset 5px 0 5px rgb(255, 196, 196),
+                    inset -4px 0 5px rgb(138, 0, 0);
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                height: 30px;
+                width: 100%;
+                top: 75%;
+                left: 0;
+                background: linear-gradient(to top right, rgb(150, 0, 0), rgb(145, 77, 77));
+                box-shadow: -2px -2px 2px rgb(255, 196, 196), -10px 20px 2px black, inset 1px 1px 1px rgb(255, 196, 196),
+                    inset -1px -1px 2px rgb(107, 81, 81);
+                border-radius: 50%;
+                transform-style: preserve-3d;
+            }
+        }
+        div.baton.aff3d {
+            display: block;
+            transform-style: preserve-3d;
+            perspective: 300px;
+            transition: 1s ease;
+            transform: translateZ(20px) rotate3d(1, 0.5, 0, -0.23turn);
+            height: var(--lBaton);
+            width: var(--lBaton);
+            border-radius: 50%;
+            padding: 2em;
+    
+            > .surface {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                background-color: var(--bgCSurface);
+                height: var(--lgBaton);
+                width: calc(3.1415 * var(--lBaton) / 4);
+                transform-origin: 50% 0%;
+    
+                &:first-child {
+                    background-color: rgba(255, 0, 0, 0.562);
+                    height: var(--lBaton);
+                    width: var(--lBaton);
+                    transform: translate3d(-50%, -50%, var(--milgBaton));
+                    // border-radius: 50%;
+                }
+                &:last-child {
+                    background-color: transparent;
+                    height: var(--lBaton);
+                    width: var(--lBaton);
+                    transform: translate3d(-50%, -50%, calc(var(--milgBaton) * -1));
+                    // border-radius: 50%;
+                }
+                @for $i from 2 through $nbSurface + 1 {
+                    &:nth-of-type(#{$i}) {
+                        filter: hue-rotate($i/$nbSurface * 360deg);
+                        // filter: contrast($i/$nbSurface);
+                        transform: translate3d(-50%, 0, calc(var(--milgBaton) * -1))
+                            rotateX(0.25turn)
+                            rotateY($i/$nbSurface * 360deg)
+                            translateZ(var(--diametre));
+                    }
+                }
+            }
+    
+            &:hover {
+                transform: translateZ(50px) rotate3d(1, 0.3, 0, -0.3turn) rotate(300deg);
+    
+                animation-delay: 1s;
+            }
+        }
+    }
+
+    section.initialiseur {
+        position: absolute;
+        left: 50%;
+        top:50%;
+        background-color: #676767;
+        border-radius: 1em;
+        padding: 1em;
+        width: auto;
+        height: auto;
+        transform: translate(-50%,-50%);
+        input[type="checkbox"] {
+            ~ span {
+                padding: 0.5em;
+                border-radius: 1em;
+                background-color: #555555;
+            }
+            &:checked ~ span {
+                background-color: #3f3a8a;
+                color: red;
+            }
+        }
+    }
+
+    aside {
+        position: relative;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+
+        @media screen and (max-width: 400px) {
+        }
+
+        section.entite {
+        }
+    }
+}
+@keyframes spin {
+    0% {
+        transform: translateZ(-30px) rotate3d(1, 0.3, 0.2, -0.3turn) rotate(0deg);
+    }
+    100% {
+        transform: translateZ(-30px) rotate3d(1, 0.3, 0.2, -0.3turn) rotate(360deg);
+    }
+}
