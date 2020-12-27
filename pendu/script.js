@@ -151,7 +151,7 @@ $('document').ready(() => {
         animaction(essai, 'fadeIn')
 
         cptBR === strMC.length ? resultat() : null
-        essai === 10 ? resultat(0) : null
+        essai === nbrE ? resultat(0) : null
 
     }
     let resultat = (positiveOuNegative = true) => {

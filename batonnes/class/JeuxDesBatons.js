@@ -61,8 +61,13 @@ class JeuxDesBatons {
         // personnalise les informations joueurs
         JeuxDesBatons.setInterfaceJoueurs(this)
 
-        JeuxDesBatons.ifJoueurActive(false)
+        this.ifJoueurActive(false)
 
+
+        // lancement moisi de l'interface
+        this.ia 
+        ? this.robotActive().affichage(this.ia).robotJouer()
+        : this.affichage(false)
     }
 
     /**
@@ -102,8 +107,7 @@ class JeuxDesBatons {
         b(this.dom_initface).hide()
         this.dom_btnStart.addEventListener("click", JeuxDesBatons.commencer)
 
-        JeuxDesBatons.dom_initface.firstElementChild.addEventListener('submit', JeuxDesBatons.submitInit )
-
+        JeuxDesBatons.dom_initface.firstElementChild.addEventListener('submit', JeuxDesBatons.submitInit)
     }
 
     /**
@@ -112,7 +116,7 @@ class JeuxDesBatons {
      */
     static submitInit(e) {
         e.preventDefault()
-        JeuxDesBatons.dom_initface.firstElementChild
+        // JeuxDesBatons.dom_initface.firstElementChild
         let form = e.target
 
         JeuxDesBatons.setInstance({
@@ -124,13 +128,11 @@ class JeuxDesBatons {
                 ia: form.ia.checked
             },
             vueBatons: IfBatons3d,
-            vue3d: form._3d.checked || false
+            vue3d: form._3d.checked ?? false
         })
 
         form.reset()
         b(JeuxDesBatons.dom_initface).fadeOut()
-
-        
 
     }
 
@@ -143,7 +145,7 @@ class JeuxDesBatons {
         let btnS = JeuxDesBatons.dom_btnStart
         b(JeuxDesBatons.dom_initface).slideDown('slow')
         btnS.removeEventListener("click", JeuxDesBatons.commencer)
-        btnS.innerHTML = "réinitialiser"
+        btnS.innerText = "réinitialiser"
         btnS.addEventListener("click", JeuxDesBatons.reset)
     }
 
@@ -191,10 +193,10 @@ class JeuxDesBatons {
      * met un contour sur l'interface du joueur qui doit jouer
      * @param {boolean} tour true ou false
      */
-    static ifJoueurActive(tour = true) {
+    ifJoueurActive(tour = true) {
 
 
-        let dom2 = tour => [this.dom_ij1, this.dom_ij2]
+        let dom2 = tour => [JeuxDesBatons.dom_ij1, JeuxDesBatons.dom_ij2]
             .forEach((x, i) => i == (tour ? 0 : 1) ?
                 !x.classList.contains('actif') ? x.classList.add('actif') : null :
                 x.classList.contains('actif') ? x.classList.remove('actif') : null
@@ -208,16 +210,15 @@ class JeuxDesBatons {
      * @param {number} actuaNbBatons 
      */
     jouer(actuaNbBatons) {
-
         // robot
-           this.ia ? this.robotActive() : null
+        this.ia ? this.robotActive() : null
         this.nbBatons = actuaNbBatons
-        JeuxDesBatons.ifJoueurActive(this.changeTour())
-        // console.log(this.tour, "le premier tour est négatif")
+        this.ifJoueurActive(this.changeTour())
+        console.log(this.tour, "le premier tour est négatif")
         if (this.nbBatons > 1) {
-            !this.tour && this.joueur2.nom === "Robot" ?
-                this.robotJouer()
-                : this.vueBatons.affichage(this)
+            !this.tour && this.joueur2.nom === "Robot"
+                ? this.robotJouer()
+                : this.affichage()
         } else {
             this.resulter()
         }
@@ -225,10 +226,11 @@ class JeuxDesBatons {
     }
 
     robotActive() {
-        this.joueur2.toCommand(JeuxDesBatons, this).tacticBuilder()
+        this.joueur2.tacticBuilder(this)
+        return this
     }
-    robotJouer(){
-        this.joueur2.toPlay().toGiveGameTurn()
+    robotJouer() {
+        this.joueur2.toPlay()
     }
 
     changeTour() {
@@ -236,9 +238,13 @@ class JeuxDesBatons {
         return this.tour
     }
 
+    affichage(actionRobotisee = false){
+        this.vueBatons.affichage(actionRobotisee)
+        return this
+    }
+
     resulter() {
-        console.log(this.tour)
-        alert('gagner')
+        alert((!this.tour ? this.joueur.nom : this.joueur2.nom) + ' a gagné')
     }
 
     tuEsPartis() {

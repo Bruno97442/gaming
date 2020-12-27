@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<title>les bâtonnées</title>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta
-		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+	<title>les bâtonnées</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	</head>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
-	<body>
-
+<body>
+	<section id="batonnee">
 		<main class="batonnee">
 			<h1>Les bâtonnées
 				<a href="sb3.html">sb3</a>
@@ -38,22 +38,26 @@
 				<form class="form initForm">
 					<div class="form-group">
 						<label for="nbBatons">nombre de bâtons</label>
-						<input type="number" value="20" class="form-control form-control-lg" name="nbBatons" id="nbBatons" aria-describedby="descNbBatons">
+						<input type="number" value="20" class="form-control form-control-lg" name="nbBatons"
+							id="nbBatons" aria-describedby="descNbBatons">
 						<small id="descNbBatons" class="form-text text-muted"></small>
 					</div>
 					<div class="form-group">
 						<label for="pioche">Pioche</label>
-						<input type="text" value="1,2,3" class="form-control form-control-lg" name="pioche" id="pioche" aria-describedby="descPioche">
+						<input type="text" value="1,2,3" class="form-control form-control-lg" name="pioche" id="pioche"
+							aria-describedby="descPioche">
 						<small id="descPioche" class="form-text text-muted"></small>
 					</div>
 					<div class="form-group">
 						<label for="nomJoueur">Joueur</label>
-						<input type="text" value="Joueur" class="form-control form-control-lg" name="nomJoueur" id="nomJoueur" aria-describedby="descNomJoueur">
+						<input type="text" value="Joueur" class="form-control form-control-lg" name="nomJoueur"
+							id="nomJoueur" aria-describedby="descNomJoueur">
 						<small id="descNomJoueur" class="form-text text-muted"></small>
 					</div>
 					<div class="form-group">
 						<label for="nomJoueur">Joueur2</label>
-						<input type="text" class="form-control form-control-lg" name="nomJoueur2" id="nomJoueur2" aria-describedby="descNomJoueur2">
+						<input type="text" class="form-control form-control-lg" name="nomJoueur2" id="nomJoueur2"
+							aria-describedby="descNomJoueur2">
 						<small id="descNomJoueur2" class="form-text text-muted"></small>
 					</div>
 
@@ -132,24 +136,24 @@
 			</aside>
 		</main>
 		<!-- robot beginning -->
-		<div class="rocket r1">
+		<article class="rocket r1">
 			<div class="lead"></div>
 			<div class="main"></div>
 			<div class="tail"></div>
 			<div class="blast"></div>
 			<div class="blast2"></div>
-		</div>
-		<div class="rocket r2">
+		</article>
+		<article class="rocket r2">
 			<div class="lead"></div>
 			<div class="main"></div>
 			<div class="tail"></div>
 			<div class="blast"></div>
 			<div class="blast2"></div>
 
-		</div>
+		</article>
 
-		<div class="robot">
-			<div class="head">
+		<article class="robot">
+			<header class="head">
 				<div class="eyes">
 					<div class="eye">
 						<div class="retina"></div>
@@ -161,28 +165,29 @@
 						<div class="speak"></div>
 					</div>
 				</div>
-			</div>
-			<div class="body"></div>
-		</div>
-		<div class="tl click" style="cursor:pointer; position: absolute; top: 0;left: 0; margin:3em">ici</div>
-		<div class="tr click" style="cursor:pointer; position: absolute; top: 0;right: 0; margin:3em">ici</div>
-		<div class="bl click" style="cursor:pointer; position: absolute; bottom: 0;left: 0; margin:3em">ici</div>
-		<div class="br click" style="cursor:pointer; position: absolute; bottom: 0;right: 0; margin:3em">ici</div>
+			</header>
+			<main class="body"></main>
+		</article>
+		<div class="tl click" style="cursor:pointer; position: absolute; top: 0; left: 0; margin:3em">ici</div>
+		<div class="tr click" style="cursor:pointer; position: absolute; top: 0; right: 0; margin:3em">ici</div>
+		<div class="bl click" style="cursor:pointer; position: absolute; bottom: 0; left: 0; margin:3em">ici</div>
+		<div class="br click" style="cursor:pointer; position: absolute; bottom: 0; right: 0; margin:3em">ici</div>
 		<!-- robot end -->
-	</body>
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="config.js"></script>
-	<script src="class/surcoucheJQ.js"></script>
-	<script src="class/Robot.js"></script>
-	<script src="class/Joueur.js"></script>
-	<script src="class/IfBatons3d.js"></script>
-	<script src="class/MotionObject.js"></script>
-	<script src="class/JeuxDesBatons.js"></script>
-	<script src="script.js"></script>
+	</section>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="config.js"></script>
+<script src="class/surcoucheJQ.js"></script>
+<script src="class/Robot.js"></script>
+<script src="class/Joueur.js"></script>
+<script src="class/IfBatons3d.js"></script>
+<script src="class/MotionObject.js"></script>
+<script src="class/JeuxDesBatons.js"></script>
+<script src="script.js"></script>
 
 </html>

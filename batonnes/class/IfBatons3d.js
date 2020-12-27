@@ -39,19 +39,9 @@ class IfBatons3d {
         this.uneFoisTour = false
 
 
-        this.affichage()
-
-
     }
 
     baton = classUniq => `<div class="baton b${classUniq}" style="background-color: black"></div>`
-
-    getNombre = () =>
-        this.nombre
-
-    setNombre(nombre) {
-        this.nombre = nombre
-    }
 
     surfaces(nb) {
         let plats = 2,
@@ -65,7 +55,7 @@ class IfBatons3d {
         return surface3d
     }
 
-    affichage() {
+    affichage(tourDuRobot = false) {
 
         if (this.premierAffiche) {
             // création des bâtons
@@ -90,15 +80,27 @@ class IfBatons3d {
             }
         }
 
-        this.premierAffiche = false
-        // identifie les piochables, créer action remove
-
-        this.dom.forEach(function (x) {
-            x.addEventListener('click', IfBatons3d.gestionPioche)
-        })
+        
+        this.premierAffiche = false // plateau vert
+        // identifie les piochables, créer action de retirer les pioches selectionnées
+        if (tourDuRobot) {
+            // console.log('affichage robot')
+            
+        }else{
+            this.dom.forEach(function (x) {
+                x.addEventListener('click', IfBatons3d.gestionPioche)
+            })
+        }
 
     }
 
+    robotretirer(nb){
+        for (let i = 0; i < nb; i++) {
+            this.dom[this.dom.length - 1].remove()
+            this.dom.pop()
+            this.nombre--
+        }
+    }
     static actua({ dom, nombre }) {
         IfBatons3d.getInstance().dom = dom
         IfBatons3d.getInstance().nombre = nombre
@@ -110,7 +112,6 @@ class IfBatons3d {
             posEle = parseInt(this.classList[0].substr(1)),
             pos = nombre - posEle + 1,
             lesPioches = dom.filter((x, j) => j >= nombre - pos)
-
 
         // si correspond choix de pioche
         if (!pioche.every(line => line != pos)) {
@@ -139,7 +140,6 @@ class IfBatons3d {
         domElement.remove()
 
     }
-
 
     static getInstance() {
         return this.instance
