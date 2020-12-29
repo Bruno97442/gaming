@@ -60,17 +60,17 @@ class IfBatons3d {
         if (this.premierAffiche) {
             // création des bâtons
             const batons = document.createElement('div')
-                batons.classList.add('batons')
+            batons.classList.add('batons')
             for (let i = this.nombre; i > 0; i--) {
                 const baton = document.createElement('div')
                 baton.classList.add('b' + i, 'baton')
-                if (this._3d){
+                if (this._3d) {
                     baton.style.top = '50%'
                     baton.style.left = 10 + i * 30 + 'px'
                     // baton.style.position = 'absolute'
-                    baton.innerHTML = this.surfaces(4)
+                    baton.innerHTML = this.surfaces(i)
                     baton.classList.add('aff3d')
-                }else{
+                } else {
                     baton.classList.add('flat')
                 }
                 this.dom = [baton, ...this.dom]
@@ -80,21 +80,20 @@ class IfBatons3d {
             }
         }
 
-        
-        this.premierAffiche = false // plateau vert
+
+        this.premierAffiche ? this.premierAffiche = false : '' // plateau vert
         // identifie les piochables, créer action de retirer les pioches selectionnées
-        if (tourDuRobot) {
+        if (!tourDuRobot) {
             // console.log('affichage robot')
-            
-        }else{
-            this.dom.forEach(function (x) {
-                x.addEventListener('click', IfBatons3d.gestionPioche)
-            })
+            this.gestionPioche()
+            // this.dom.forEach(function (x) {
+            //     x.addEventListener('click', IfBatons3d.gestionPioche)
+            // })
         }
 
     }
 
-    robotretirer(nb){
+    robotRetirer(nb) {
         for (let i = 0; i < nb; i++) {
             this.dom[this.dom.length - 1].remove()
             this.dom.pop()
@@ -105,35 +104,52 @@ class IfBatons3d {
         IfBatons3d.getInstance().dom = dom
         IfBatons3d.getInstance().nombre = nombre
     }
-    
 
-    static gestionPioche() {
+
+    gestionPioche() {
+        let { pioche, dom, infoBatonHover, infoBaton } = this
+
+
+        let interactBation = dom.filter((baton, i, tab) => pioche.some(p => p === (tab.length - +baton.classList[0].substr(1) + 1)))
+        interactBation.forEach(baton => {
+            baton.addEventListener('mouseenter', infoBatonHover)
+
+            // POUR LES HOVERS INTERACT
+            // let posEle = parseInt(baton.classList[0].substr(1)),
+            //     pos = nombre - posEle + 1
+            // dom.filter((x, j) => j >= nombre - pos)
+            //     .forEach(ele => ele.dataset = { msg: '☠️', hover: baton.classList[0] })
+            baton.addEventListener('click', IfBatons3d.piocher)
+        })
+    }
+    
+    infoBaton(){
+        
+    }
+    infoBatonHover(){
+        let nb = 
+    }
+    static piocher() {
         let { pioche, dom, nombre } = IfBatons3d.getInstance(),
             posEle = parseInt(this.classList[0].substr(1)),
             pos = nombre - posEle + 1,
             lesPioches = dom.filter((x, j) => j >= nombre - pos)
-
         // si correspond choix de pioche
-        if (!pioche.every(line => line != pos)) {
+        if (pioche.some(p => p === pos)) {
             lesPioches.forEach(ele => IfBatons3d.retirer(ele))
             dom = dom.slice(0, posEle - 1)
-            IfBatons3d.getInstance().uneFoisTour = IfBatons3d.getInstance().uneFoisTour ? false : false
+            // IfBatons3d.getInstance().uneFoisTour = IfBatons3d.getInstance().uneFoisTour ? false : false
             nombre = nombre - pos
             // met à jour le dom virtuel hahahaaha
             IfBatons3d.actua({ dom, nombre })
 
-            
-            dom.forEach(x => x.removeEventListener('click', IfBatons3d.gestionPioche))
+
+            dom.forEach(x => x.removeEventListener('click', IfBatons3d.piocher))
             // pas cool la gestion car active une méthode du jeux (app) dans l'affichage
             JeuxDesBatons.getInstance().jouer(nombre)
         }
-
-
-        // Ajuste position() ici
-        // 
-        // 
-        // avec de l'animation
     }
+ 
 
     static retirer(domElement) {
 

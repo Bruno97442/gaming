@@ -102,13 +102,6 @@ class Robot {
         return this
     }
 
-    toGiveGameTurn() {
-        // this.game.ifJoueurActive(this.game.changeTour())
-        // this.game.affichage()
-
-        // return this
-    }
-
     toPlay() {
         // regard le nbr restant
         // prend le meilleur coup pour l'envoyer sur une position perdante
@@ -120,7 +113,7 @@ class Robot {
         let robotTakeOff = pioche[this.stratege[nbBatons - 1][0]]
 
         this.game.nbBatons = nbBatons - robotTakeOff
-        this.game.vueBatons.robotretirer(robotTakeOff)
+        this.game.vueBatons.robotRetirer(robotTakeOff)
 
         // console.log(this.stratege[nbBatons - 1])
         this.game.jouer(this.game.nbBatons)

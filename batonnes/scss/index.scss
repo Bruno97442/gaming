@@ -1,0 +1,105 @@
+@import 'style';
+  
+
+$focusSize: 25px;
+$spanLength: 100%;
+$borderWidth: 4px;
+$FocusColor: #fff;
+@mixin bgC($color) {
+    background-color: $color;
+}
+@mixin borderC($color) {
+    border-color: $color;
+}
+.focus {
+    pointer-events: none;
+    mix-blend-mode: difference;
+    position: absolute;
+    width: $focusSize;
+    height: $focusSize;
+    border-radius: 50%;
+    border: $borderWidth solid $FocusColor;
+    transition: transform 0.3s ease-in-out, width 0.3s, height 0.3s;
+    transform: translate(-50%, -50%) rotate(0deg);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    & span {
+        background-color: $FocusColor;
+        position: absolute;
+        transition: 0.6s;
+        transform-origin: left;
+        width: $spanLength - 40%;
+        height: 20%;
+        left: 50%;
+
+    }
+    &.active {
+        width: $focusSize + 3px;
+        height: $focusSize + 3px;
+        border-width: $borderWidth - 1px;
+        mix-blend-mode: unset !important;
+
+        // transform: translate(-50%, -50%) rotate(90deg);
+        @include borderC(#f00);
+
+        & span {
+            width: $spanLength;
+            @include bgC(#f00);
+        }
+    }
+}
+
+.focus-comeIn{
+    animation: focusCoreComeIn 0.5s ease-in;
+    span{
+        @for $var from 0 to 4 {
+            &:nth-child(#{1 + $var}) {
+                animation: focusWingComeIn#{$var} 1s ease;
+                transform: rotate(#{$var * 90}deg) translateX(50%);
+            }
+        }
+    }
+}
+.focus-leave{
+    animation: focusCoreComeIn 0.5s ease-out reverse;
+    span{
+        @for $var from 0 to 4 {
+            &:nth-child(#{1 + $var}) {
+                animation: focusWingComeIn#{$var} 1s ease reverse;
+                transform: rotate(#{$var * 90}deg) translateX(50%);
+            }
+        }
+    }
+}
+@keyframes focusCoreComeIn {
+    from {
+        transform: translate(-50%, -50%) scale(5);
+        border-width: 1px;
+        opacity: 0.7;
+    }
+    to {
+        transform: translate(-50%, -50%);
+    }
+}
+@for $i from 0 to 4 {
+    @keyframes focusWingComeIn#{$i} {
+        0% {
+            transform: rotate(#{$i * 90}deg) translateX(50%);
+            width: $spanLength + 150%;
+            height: 5%;
+        }
+        50% {
+            transform: rotate(#{$i * 90}deg) translateX(150%);
+            width: $spanLength;
+            opacity: 0.3;
+        }
+        85% {
+            transform: rotate(#{$i * 90}deg) translateX(0%);
+        }
+        100% {
+            transform: rotate(#{$i * 90}deg) translateX(50%);
+        }
+    }
+}

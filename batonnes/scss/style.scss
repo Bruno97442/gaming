@@ -25,12 +25,12 @@ body {
 .batonnee {
     height: 100vh;
     display: grid;
+    cursor: none;
     grid-template-columns: 50% 50%;
     grid-template-rows: 10% 30% max-content auto;
     grid-template-areas:
-        "titre titre"
+        "titre btn-commencer"
         "joueur1 joueur2"
-        "btn-commencer btn-commencer"
         "plateforme plateforme";
 
     @media screen and (max-width: 400px) {
@@ -79,6 +79,7 @@ body {
         width: 80%;
         height: auto;
     }
+
     .batons {
         position: relative;
         background-color: teal;
@@ -120,70 +121,71 @@ body {
                 transform-style: preserve-3d;
             }
         }
-        div.baton.aff3d {
-            display: block;
-            transform-style: preserve-3d;
-            perspective: 300px;
-            transition: 1s ease;
-            transform: translateZ(20px) rotate3d(1, 0.5, 0, -0.23turn);
-            height: var(--lBaton);
-            width: var(--lBaton);
-            border-radius: 50%;
-            padding: 2em;
-    
-            > .surface {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                background-color: var(--bgCSurface);
-                height: var(--lgBaton);
-                width: calc(3.1415 * var(--lBaton) / 4);
-                transform-origin: 50% 0%;
-    
-                &:first-child {
-                    background-color: rgba(255, 0, 0, 0.562);
-                    height: var(--lBaton);
-                    width: var(--lBaton);
-                    transform: translate3d(-50%, -50%, var(--milgBaton));
-                    // border-radius: 50%;
-                }
-                &:last-child {
-                    background-color: transparent;
-                    height: var(--lBaton);
-                    width: var(--lBaton);
-                    transform: translate3d(-50%, -50%, calc(var(--milgBaton) * -1));
-                    // border-radius: 50%;
-                }
-                @for $i from 2 through $nbSurface + 1 {
-                    &:nth-of-type(#{$i}) {
-                        filter: hue-rotate($i/$nbSurface * 360deg);
-                        // filter: contrast($i/$nbSurface);
-                        transform: translate3d(-50%, 0, calc(var(--milgBaton) * -1))
-                            rotateX(0.25turn)
-                            rotateY($i/$nbSurface * 360deg)
-                            translateZ(var(--diametre));
-                    }
+    }
+    div.baton.aff3d {
+        display: block;
+        transform-style: preserve-3d;
+        perspective: 300px;
+        transition: 1s ease;
+        transform: translateZ(20px) rotate3d(1, 0.5, 0, -0.23turn);
+        height: var(--lBaton);
+        width: var(--lBaton);
+        border-radius: 50%;
+        padding: 2em;
+
+        > .surface {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background-color: var(--bgCSurface);
+            height: var(--lgBaton);
+            width: calc(3.1415 * var(--lBaton) / 4);
+            transform-origin: 50% 0%;
+
+            &:first-child {
+                background-color: rgba(255, 0, 0, 0.562);
+                height: var(--lBaton);
+                width: var(--lBaton);
+                transform: translate3d(-50%, -50%, var(--milgBaton));
+                // border-radius: 50%;
+            }
+            &:last-child {
+                background-color: transparent;
+                height: var(--lBaton);
+                width: var(--lBaton);
+                transform: translate3d(-50%, -50%, calc(var(--milgBaton) * -1));
+                // border-radius: 50%;
+            }
+            @for $i from 2 through $nbSurface + 1 {
+                &:nth-of-type(#{$i}) {
+                    filter: hue-rotate($i/$nbSurface * 360deg);
+                    // filter: contrast($i/$nbSurface);
+                    transform: translate3d(-50%, 0, calc(var(--milgBaton) * -1))
+                        rotateX(0.25turn)
+                        rotateY($i/$nbSurface * 360deg)
+                        translateZ(var(--diametre));
                 }
             }
-    
-            &:hover {
-                transform: translateZ(50px) rotate3d(1, 0.3, 0, -0.3turn) rotate(300deg);
-    
-                animation-delay: 1s;
-            }
+        }
+
+        &:hover {
+            transform: translateZ(50px) rotate3d(1, 0.3, 0, -0.3turn) rotate(300deg);
+
+            animation-delay: 1s;
         }
     }
 
     section.initialiseur {
         position: absolute;
+        cursor: pointer;
         left: 50%;
-        top:50%;
+        top: 50%;
         background-color: #676767;
         border-radius: 1em;
         padding: 1em;
         width: auto;
         height: auto;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         input[type="checkbox"] {
             ~ span {
                 padding: 0.5em;
@@ -203,9 +205,6 @@ body {
         grid-template-rows: repeat(2, 1fr);
 
         @media screen and (max-width: 400px) {
-        }
-
-        section.entite {
         }
     }
 }

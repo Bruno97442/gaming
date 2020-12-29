@@ -150,7 +150,7 @@ class JeuxDesBatons {
     }
 
     static reset() {
-        console.log('reset')
+        // console.log('reset')
         let btnS = JeuxDesBatons.dom_btnStart
 
         btnS.innerHTML = "Commencer"
@@ -214,7 +214,7 @@ class JeuxDesBatons {
         this.ia ? this.robotActive() : null
         this.nbBatons = actuaNbBatons
         this.ifJoueurActive(this.changeTour())
-        console.log(this.tour, "le premier tour est négatif")
+        // console.log(this.tour, "le premier tour est négatif")
         if (this.nbBatons > 1) {
             !this.tour && this.joueur2.nom === "Robot"
                 ? this.robotJouer()
