@@ -90,7 +90,6 @@ class MotionObject {
             targetPosY = Math.floor(targetD.y + targetD.height / 2),
             rad = Math.atan2(targetD.x - this.pos.x, targetD.y - this.pos.y),
             rotation = (rad * (180 / Math.PI) * -1) + 180
-        console.log(rad)
 
         this.pos = true
         this.rotate(rotation)

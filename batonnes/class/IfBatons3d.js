@@ -88,7 +88,6 @@ class IfBatons3d {
         this.premierAffiche ? this.premierAffiche = false : '' // plateau vert
         // identifie les piochables, créer action de retirer les pioches selectionnées
         if (!tourDuRobot) {
-            // console.log('affichage robot')
             this.gestionPioche()
             // this.dom.forEach(function (x) {
             //     x.addEventListener('click', IfBatons3d.gestionPioche)
@@ -188,7 +187,6 @@ class IfBatons3d {
             ele.style.animationDuration = duration + 's'
             ele.style.animationDelay = duration + i * 0.2 + 's'
             ele.addEventListener('animationend', () => {
-                console.log('héé')
                     IfBatons3d.retirer(ele)
             })
         })
@@ -211,7 +209,6 @@ class IfBatons3d {
     static retirer(domElement, time = 0) {
         if (time) {
             setTimeout(() => {
-                console.log(domElement)
                 domElement.remove()
             }, time);
             return

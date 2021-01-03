@@ -70,7 +70,7 @@ class BroFocus {
         let { focusSign, sound, projectileLife } = BroFocus.ins('mouseFocus')
         focusSign.classList.add("active")
         projectileLife(e)
-        // sound.shoot.cloneNode().play()
+        sound.shoot ? sound.shoot.cloneNode().play() : null
         setTimeout(() => {
             focusSign.classList.remove("active")
         }, 300);

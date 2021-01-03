@@ -110,18 +110,17 @@ class Brobot {
         }
 
 
-        console.log("j'ai jouer " + robotTakeOff + " il reste " + game.nbBatons)
 
 
         function afterFocusInjection(e) {
             this.removeEventListener('animationend', afterFocusInjection)
             let m = document.createRange().createContextualFragment(`<article class="rocket dropDown r1">
-            	<main class="body">
-            		<div class="lead"></div>
-            		<div class="main"></div>
-            		<div class="tail"></div>
-            		<div class="blast"></div>
-            		<div class="blast2"></div>
+            	<main class="rocket-body">
+            		<div class="rocket-lead"></div>
+            		<div class="rocket-main"></div>
+            		<div class="rocket-tail"></div>
+            		<div class="rocket-blast"></div>
+            		<div class="rocket-blast2"></div>
             	</main>
             </article>`).firstElementChild;
             m.dataset.end = this.dataset.end
@@ -133,7 +132,6 @@ class Brobot {
             this.removeEventListener('animationend', afterBombardmentInjection)
             let p = this.nextSibling
             this.remove()
-            console.log(p, this)
 
             MotionObject.boom(p)
             p.classList.add('goOut')
