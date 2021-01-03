@@ -10,8 +10,8 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="css/index.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/index.min.css">
 </head>
 
 <body>
@@ -22,18 +22,36 @@
 			</h1>
 			<div class="ifj1">
 				<h2>joueur1</h2>
-				<p class="score">score :
-					<strong>0</strong>
-				</p>
+
 			</div>
 			<div class="ifj2">
 				<h2>joueur2</h2>
-				<p class="score">score :
-					<strong>0</strong>
-				</p>
+
 			</div>
 			<button type="button" class="commencer btn btn-primary btn-lg">Commencer</button>
-			<section class="plateforme"></section>
+			<!-- robot beginning -->
+			<article class="brobot">
+				<header class="head">
+					<div class="eyes">
+						<div class="eye">
+							<div class="retina"></div>
+						</div>
+						<div class="eye">
+							<div class="retina"></div>
+						</div>
+						<div class="mouth">
+							<div class="speak"></div>
+						</div>
+					</div>
+				</header>
+				<main class="body">
+					<div>🚀</div>
+				</main>
+			</article>
+			<section class="plateforme">
+
+			</section>
+
 			<section class="initialiseur">
 				<form class="form initForm">
 					<div class="form-group">
@@ -51,127 +69,32 @@
 					<div class="form-group">
 						<label for="nomJoueur">Joueur</label>
 						<input type="text" value="Joueur" class="form-control form-control-lg" name="nomJoueur"
-							id="nomJoueur" aria-describedby="descNomJoueur">
+							id="nomJoueur" placeholder="nom du joueur">
 						<small id="descNomJoueur" class="form-text text-muted"></small>
 					</div>
 					<div class="form-group">
 						<label for="nomJoueur">Joueur2</label>
 						<input type="text" class="form-control form-control-lg" name="nomJoueur2" id="nomJoueur2"
-							aria-describedby="descNomJoueur2">
+							placeholder="Brobot">
 						<small id="descNomJoueur2" class="form-text text-muted"></small>
 					</div>
+					<div class="row">
+						<label class="custom-control custom-checkbox">
+							<input type="checkbox" checked name="ia" id="ia" class="custom-control-input">
+							<span class="custom-control-indicator">contre l'algo</span>
+						</label>
+						<label class="custom-control custom-checkbox">
+							<input type="checkbox" name="_3d" class="custom-control-input">
+							<span class="custom-control-indicator">La 3D de fou</span>
+						</label>
+					</div>
 
-					<label class="custom-control custom-checkbox">
-						<input type="checkbox" checked name="ia" id="ia" class="custom-control-input">
-						<span class="custom-control-indicator">contre l'algo</span>
-					</label>
-					<label class="custom-control custom-checkbox">
-						<input type="checkbox" name="_3d" class="custom-control-input">
-						<span class="custom-control-indicator">La 3D de fou</span>
-					</label>
 					<button type="submit" class="btn btn-primary">Démarrer</button>
 				</form>
 			</section>
-			<aside class="info d-none">
-				<button class="btn btn-warning btn-lg">Structure</button>
-				<h2 class="note">Construction des Classes</h2>
-				<section class="entite ent1">
-					<h3>JeuxDesBatons</h3>
-					<h4>Propriétés</h4>
-					<ul class="properties">
-						<li>joueurs</li>
-						<li>tour</li>
-						<li>batons</li>
-						<li>template</li>
-						<li>...DOMaccess</li>
-					</ul>
-					<h4>Méthodes</h4>
-					<ul class="methods">
-						<li>init()</li>
-						<li>commencer()</li>
-						<li>docSlt()</li>
-						<li>changeTour()</li>
-						<li>resulter()</li>
-					</ul>
-				</section>
-				<section class="entite ent2">
-					<h3>Joueur</h3>
-					<h4>Propriétés</h4>
-					<ul class="properties">
-						<li>nom</li>
-						<li>score</li>
-					</ul>
-					<h4>Méthodes</h4>
-					<ul class="methods">
-						<li>retirer()</li>
-						<li></li>
-					</ul>
-				</section>
-				<section class="entite ent3">
-					<h3></h3>
-					<h4>Propriétés</h4>
-					<ul class="properties">
-						<li></li>
-						<li></li>
-					</ul>
-					<h4>Méthodes</h4>
-					<ul class="methods">
-						<li></li>
-						<li></li>
-					</ul>
-				</section>
-				<section class="entite ent4">
-					<h3></h3>
-					<h4>Propriétés</h4>
-					<ul class="properties">
-						<li></li>
-						<li></li>
-					</ul>
-					<h4>Méthodes</h4>
-					<ul class="methods">
-						<li></li>
-						<li></li>
-					</ul>
-				</section>
-			</aside>
+
 		</main>
-		<!-- robot beginning -->
-		<article class="rocket r1">
-			<div class="lead"></div>
-			<div class="main"></div>
-			<div class="tail"></div>
-			<div class="blast"></div>
-			<div class="blast2"></div>
-		</article>
-		<article class="rocket r2">
-			<div class="lead"></div>
-			<div class="main"></div>
-			<div class="tail"></div>
-			<div class="blast"></div>
-			<div class="blast2"></div>
 
-		</article>
-
-		<article class="robot">
-			<header class="head">
-				<div class="eyes">
-					<div class="eye">
-						<div class="retina"></div>
-					</div>
-					<div class="eye">
-						<div class="retina"></div>
-					</div>
-					<div class="mouth">
-						<div class="speak"></div>
-					</div>
-				</div>
-			</header>
-			<main class="body"></main>
-		</article>
-		<div class="tl click" style="cursor:pointer; position: absolute; top: 0; left: 0; margin:3em">ici</div>
-		<div class="tr click" style="cursor:pointer; position: absolute; top: 0; right: 0; margin:3em">ici</div>
-		<div class="bl click" style="cursor:pointer; position: absolute; bottom: 0; left: 0; margin:3em">ici</div>
-		<div class="br click" style="cursor:pointer; position: absolute; bottom: 0; right: 0; margin:3em">ici</div>
 		<!-- robot end -->
 	</section>
 </body>
@@ -179,15 +102,15 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="config.js"></script>
 <script src="class/surcoucheJQ.js"></script>
-<script src="class/Robot.js"></script>
+<script src="class/MotionObject.js"></script>
+<script src="class/Brobot.js"></script>
 <script src="class/Joueur.js"></script>
 <script src="class/IfBatons3d.js"></script>
-<script src="class/MotionObject.js"></script>
-<script src="class/GameAnimate.js"></script>
+<script src="class/BroFocus.js"></script>
 <script src="class/JeuxDesBatons.js"></script>
 <script src="script.js"></script>
 

@@ -22,6 +22,7 @@ class JeuxDesBatons {
         this._vueBatons = value
     }
 
+    premiereFois = true
 
     /**
      * @constructor
@@ -30,7 +31,7 @@ class JeuxDesBatons {
      * @param {Number} param0.parametre.nbBatons
      * @param {Array} param0.parametre.pioche
      * @param {Joueur} param0.parametre.joueur
-     * @param {Joueur | Robot} param0.parametre.joueur2
+     * @param {Joueur | Brobot} param0.parametre.joueur2
      * @param {Object} param0.vueBatons
      * @param {Boolean} param0.vue3d
      */
@@ -40,7 +41,7 @@ class JeuxDesBatons {
             nbBatons: 20,
             pioche: [1, 2, 3],
             joueur: { nom: "Joueur", score: 0 },
-            joueur2: Joueur | Robot,
+            joueur2: Joueur | Brobot,
             ia: true | false
         },
         vueBatons = IfBatons3dObject,
@@ -106,7 +107,6 @@ class JeuxDesBatons {
         }
         b(this.dom_initface).hide()
         this.dom_btnStart.addEventListener("click", JeuxDesBatons.commencer)
-
         JeuxDesBatons.dom_initface.firstElementChild.addEventListener('submit', JeuxDesBatons.submitInit)
     }
 
@@ -124,7 +124,7 @@ class JeuxDesBatons {
                 nbBatons: parseInt(form.nbBatons.value),
                 pioche: form.pioche.value.split(',').map(x => parseInt(x)),
                 joueur: new Joueur(form.nomJoueur.value),
-                joueur2: form.ia.checked ? Robot.instance = new Robot() : new Joueur(form.nomJoueur2.value),
+                joueur2: form.ia.checked ? Brobot.instance = new Brobot() : new Joueur(form.nomJoueur2.value),
                 ia: form.ia.checked
             },
             vueBatons: IfBatons3d,
@@ -150,7 +150,9 @@ class JeuxDesBatons {
     }
 
     static reset() {
-        // console.log('reset')
+
+        let inst = JeuxDesBatons.getInstance()
+        inst.ia ? inst.joueur2.move.getBack() : ''
         let btnS = JeuxDesBatons.dom_btnStart
 
         btnS.innerHTML = "Commencer"
@@ -211,12 +213,15 @@ class JeuxDesBatons {
      */
     jouer(actuaNbBatons) {
         // robot
-        this.ia ? this.robotActive() : null
+        this.ia && this.premiereFois ? this.robotActive() : null
+
+        this.premiereFois = false
+        
         this.nbBatons = actuaNbBatons
         this.ifJoueurActive(this.changeTour())
         // console.log(this.tour, "le premier tour est négatif")
         if (this.nbBatons > 1) {
-            !this.tour && this.joueur2.nom === "Robot"
+            !this.tour && this.joueur2.nom === "Brobot"
                 ? this.robotJouer()
                 : this.affichage()
         } else {
@@ -244,7 +249,13 @@ class JeuxDesBatons {
     }
 
     resulter() {
-        alert((!this.tour ? this.joueur.nom : this.joueur2.nom) + ' a gagné')
+        let msg = document.createElement('div')
+        msg.style.fontSize = '2rem'
+        msg.style.textAlign = 'center'
+        msg.style.transform = 'translateZ(0)'
+        this.nbBatons !== 1 ? this.changeTour() : ""
+        msg.innerText = `🥳 ${!this.tour ? this.joueur.nom : this.joueur2.nom} a gagné 🥳`
+        JeuxDesBatons.dom_plateforme.prepend(msg)
     }
 
     tuEsPartis() {

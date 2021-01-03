@@ -6,17 +6,14 @@ JeuxDesBatons.init()
 
 // })
 
-// let rocket = MotionObject.new(document.querySelector('.rocket.r1'), "rocket")
-// rocket2 = MotionObject.new(document.querySelector('.rocket.r2'), "rocket2")
+let test = BroFocus.setInstance({
+    HTMLElement: document.querySelector('.batonnee'),
+    name: 'mouseFocus'
+}).plateformeFocus()
 
-// let act = target => [rocket].forEach(ele => ele.torpedo(target))
 
-// document.querySelectorAll('.click').forEach(x => x.addEventListener('click', e => { act(e.currentTarget) }))
-
-GameAnimate.instance = document.querySelector('.batonnee')
-let test = GameAnimate.instance
-console.log(test)
-test.plateformeFocus()
+// console.log(test)
+// test
 
 
 

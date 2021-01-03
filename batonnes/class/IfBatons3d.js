@@ -62,8 +62,11 @@ class IfBatons3d {
             const batons = document.createElement('div')
             batons.classList.add('batons')
             for (let i = this.nombre; i > 0; i--) {
+                const container = document.createElement('article')
                 const baton = document.createElement('div')
-                baton.classList.add('b' + i, 'baton')
+                container.className = `b${i} ctrB`
+                baton.className = 'baton'
+                baton.setAttribute('name', 'baton')
                 if (this._3d) {
                     baton.style.top = '50%'
                     baton.style.left = 10 + i * 30 + 'px'
@@ -73,9 +76,10 @@ class IfBatons3d {
                 } else {
                     baton.classList.add('flat')
                 }
-                this.dom = [baton, ...this.dom]
+                container.append(baton)
+                this.dom = [container, ...this.dom]
                 // JeuxDesBatons.dom_plateforme.innerHTML = ""
-                batons.prepend(baton)
+                batons.prepend(container)
                 JeuxDesBatons.dom_plateforme.append(batons)
             }
         }
@@ -92,13 +96,16 @@ class IfBatons3d {
         }
 
     }
-
-    robotRetirer(nb) {
-        for (let i = 0; i < nb; i++) {
-            this.dom[this.dom.length - 1].remove()
-            this.dom.pop()
-            this.nombre--
-        }
+    /**
+     * retirer n batons de la varable et du DOM en partant de la fin
+     * @param {number} nb 
+     */
+    retirerDernierBaton(nb = 0) {
+        this.dom[this.dom.length - 1 - nb].remove()
+        this.dom.pop()
+    }
+    ajouterAuDernierBaton(ele, siblingRang = 0) {
+        this.dom[this.dom.length - 1 - siblingRang].prepend(ele)
     }
     static actua({ dom, nombre }) {
         IfBatons3d.getInstance().dom = dom
@@ -107,52 +114,108 @@ class IfBatons3d {
 
 
     gestionPioche() {
-        let { pioche, dom, infoBatonHover, infoBaton } = this
+        let { pioche, dom, infoBatonHover, infoBaton, piocher } = this
 
 
         let interactBation = dom.filter((baton, i, tab) => pioche.some(p => p === (tab.length - +baton.classList[0].substr(1) + 1)))
         interactBation.forEach(baton => {
-            baton.addEventListener('mouseenter', infoBatonHover)
-
+            infoBaton(baton)
+            infoBatonHover(baton)
             // POUR LES HOVERS INTERACT
             // let posEle = parseInt(baton.classList[0].substr(1)),
             //     pos = nombre - posEle + 1
             // dom.filter((x, j) => j >= nombre - pos)
             //     .forEach(ele => ele.dataset = { msg: '☠️', hover: baton.classList[0] })
-            baton.addEventListener('click', IfBatons3d.piocher)
+            baton.addEventListener('click', piocher)
         })
     }
-    
-    infoBaton(){
-        
+    /**
+     * gestion de l'affichage des indicateurs de cible
+     * @param {HTMLElement} element 
+     */
+    infoBaton(element, action = 'add') {
+        element.children.baton.classList[action]('active')
     }
-    infoBatonHover(){
-        let nb = 
+    /**
+     * gestion de l'affichage des indicateurs de cible
+     * @param {HTMLElement} element 
+     */
+    infoBatonHover(element) {
+        let { targetInfoIn, targetInfoOut } = IfBatons3d.getInstance()
+        element.addEventListener('mouseenter', targetInfoIn)
+        element.addEventListener('mouseleave', targetInfoOut)
     }
-    static piocher() {
-        let { pioche, dom, nombre } = IfBatons3d.getInstance(),
-            posEle = parseInt(this.classList[0].substr(1)),
-            pos = nombre - posEle + 1,
-            lesPioches = dom.filter((x, j) => j >= nombre - pos)
-        // si correspond choix de pioche
-        if (pioche.some(p => p === pos)) {
-            lesPioches.forEach(ele => IfBatons3d.retirer(ele))
-            dom = dom.slice(0, posEle - 1)
-            // IfBatons3d.getInstance().uneFoisTour = IfBatons3d.getInstance().uneFoisTour ? false : false
-            nombre = nombre - pos
-            // met à jour le dom virtuel hahahaaha
-            IfBatons3d.actua({ dom, nombre })
 
+    targetInfoIn() {
+        // let targetInfoIn = IfBatons3d.getInstance().targetInfoIn,
+        let nextSibling = this.previousSibling
 
-            dom.forEach(x => x.removeEventListener('click', IfBatons3d.piocher))
-            // pas cool la gestion car active une méthode du jeux (app) dans l'affichage
-            JeuxDesBatons.getInstance().jouer(nombre)
+        while (nextSibling = nextSibling.nextSibling) {
+            let msg = document.createElement('div')
+            msg.innerText = '☠️'
+            msg.style.position = 'absolute'
+            msg.style.fontSize = '2rem'
+            msg.className = 'targetInfo comeIn'
+            msg.setAttribute('name', 'targetInfo')
+            nextSibling.append(msg)
+        }
+        // this.removeEventListener('mouseenter', targetInfoIn)
+    }
+
+    targetInfoOut() {
+        let targetInfoOut = IfBatons3d.getInstance().targetInfoOut,
+            nextSibling = this.previousSibling,
+            count = 1
+        this.removeEventListener('mouseenter', targetInfoOut)
+        while (nextSibling = nextSibling.nextSibling) {
+            let targetInfo = nextSibling.children.targetInfo
+            targetInfo.classList.remove('comeIn')
+            targetInfo.classList.add('goOut')
+            IfBatons3d.retirer(targetInfo)
         }
     }
- 
 
-    static retirer(domElement) {
 
+    piocher() {
+        let { dom, nombre, infoBaton } = IfBatons3d.getInstance(),
+            posEle = parseInt(this.classList[0].substr(1)),
+            pos = nombre - posEle + 1,
+            lesPioches = dom.filter((x, j) => j >= nombre - pos),
+            duration = 0.3
+        // si correspond choix de pioche
+        lesPioches.forEach((ele, i) => {
+            ele.classList.add('goOut')
+            ele.style.animationDuration = duration + 's'
+            ele.style.animationDelay = duration + i * 0.2 + 's'
+            ele.addEventListener('animationend', () => {
+                console.log('héé')
+                    IfBatons3d.retirer(ele)
+            })
+        })
+        dom = dom.slice(0, posEle - 1)
+
+        // retirer à la fin du tour les actives
+        dom.forEach(ele => infoBaton(ele, 'remove'))
+
+        nombre = nombre - pos
+        // met à jour le dom virtuel hahahaaha
+        IfBatons3d.actua({ dom, nombre })
+
+
+        dom.forEach(x => x.removeEventListener('click', IfBatons3d.piocher))
+        // pas cool la gestion car active une méthode du jeux (app) dans l'affichage
+        JeuxDesBatons.getInstance().jouer(nombre)
+    }
+
+
+    static retirer(domElement, time = 0) {
+        if (time) {
+            setTimeout(() => {
+                console.log(domElement)
+                domElement.remove()
+            }, time);
+            return
+        }
         domElement.remove()
 
     }

@@ -1,68 +1,66 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<title>les bâtonnées</title>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta
-		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+	<title>les bâtonnées</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="style2.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	</head>
-	<style></style>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/focus.min.css">
+	<link rel="stylesheet" href="css/brobot.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body {
+			height: 100vh;
+			cursor: none;
+			overflow: hidden;
+		}
+	</style>
+</head>
 
-	<body>
-		<div class="rocket r1">
-			<div class="lead"></div>
-			<div class="main"></div>
-			<div class="tail"></div>
-			<div class="blast"></div>
-			<div class="blast2"></div>
-		</div>
-		<div class="rocket r2">
-			<div class="lead"></div>
-			<div class="main"></div>
-			<div class="tail"></div>
-			<div class="blast"></div>
-			<div class="blast2"></div>
-
-		</div>
-
-		<div class="robot">
-			<div class="head">
-				<div class="eyes">
-					<div class="eye">
-						<div class="retina"></div>
-					</div>
-					<div class="eye">
-						<div class="retina"></div>
-					</div>
-					<div class="mouth">
-						<div class="speak"></div>
-					</div>
-				</div>
-			</div>
-			<div class="body"></div>
-		</div>
-		<div class="tl click" style="cursor:pointer; position: absolute; top: 0;left: 0; margin:3em">ici</div>
-		<div class="tr click" style="cursor:pointer; position: absolute; top: 0;right: 0; margin:3em">ici</div>
-		<div class="bl click" style="cursor:pointer; position: absolute; bottom: 0;left: 0; margin:3em">ici</div>
-		<div class="br click" style="cursor:pointer; position: absolute; bottom: 0;right: 0; margin:3em">ici</div>
+<body class="bg-dark">
+	<button type="button" onclick="history.back()" class="btn btn-primary btn-lg btn-block">Retour</button>
+	<div class="container d-flex align-items-center justify-content-center" style="height: 100%;">
+		<!-- <source src="tire.ogg" type="audio/ogg"> -->
+		<!-- <source srcset="tire.ogg" type="audio/ogg"> -->
+		</audio>
 
 
-		<!-- Optional JavaScript -->
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	</body>
+		<article class="rocket r1">
+			<main class="body">
+				<div class="lead"></div>
+				<div class="main"></div>
+				<div class="tail"></div>
+				<div class="blast"></div>
+				<div class="blast2"></div>
+			</main>
+		</article>
+	</div>
 
-	<!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-			// <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-			// <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-			// <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+</body>
 
-	<script src="class/surcoucheJQ.js"></script>
+
+<script src="class/surcoucheJQ.js"></script>
+<script src="class/BroFocus.js"></script>
+<script>
+	BroFocus.setInstance({
+		HTMLElement: document.querySelector('body'),
+		name: 'mouseFocus'
+	}).plateformeFocus()
+
+
+// let rocket = MotionObject.new(document.querySelector('.rocket.r1'), "rocket")
+// rocket2 = MotionObject.new(document.querySelector('.rocket.r2'), "rocket2")
+
+// let act = target => [rocket].forEach(ele => ele.torpedo(target))
+
+// document.querySelectorAll('.click').forEach(x => x.addEventListener('click', e => { act(e.currentTarget) }))
+
+// GameAnimate.instance = document.querySelector('.batonnee')
+</script>
 
 </html>

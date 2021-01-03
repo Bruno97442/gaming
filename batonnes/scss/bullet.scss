@@ -1,0 +1,55 @@
+$null: $nul;
+
+.bullet {
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: grid;
+    justify-content: center;
+    perspective: 500px;
+    pointer-events: none;
+    .body{
+        width: 10px;
+        height: 10px;
+        border-radius: 50% 50% 0 0;
+        background-color: rgb(196, 187, 65);
+
+    }
+    .bottom{
+        position: relative;
+        background-color: rgb(148, 147, 109);
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        border-radius: 50%;
+        top: 50%;
+        justify-content: space-evenly;
+
+    }
+    .speedEffect{
+        transform-origin: top;
+        transform: rotateX(89deg);
+
+        width: 13%;
+        background-color: rgba(255, 255, 255, 0.726);
+        margin: 25% 10%;
+        float: left;
+        box-shadow: 0 0 5px #fff;
+
+        @for $i from 1 to 4 {
+            &:nth-child(#{$i}){
+                height: 10000%;
+                
+            }
+        }
+    }
+}
+.fadeOut{
+    animation: fadeOut 1s ease-out;
+}
+@keyframes fadeOut{
+    to{
+        opacity: 0;
+        transform: scaleX(1.4);
+    }
+}

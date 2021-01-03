@@ -14,10 +14,10 @@ class MotionObject {
 
     static _objSet = {}
     static get objSet() {
-        return MotionObject._objSet
+        return this._objSet
     }
-    static set objSet(value) {
-        MotionObject._objSet = value
+    static setInstance({ HTMLElement, name }) {
+        return this._objSet[name] = new MotionObject(HTMLElement, name)
     }
 
     _HTMLElement
@@ -61,7 +61,9 @@ class MotionObject {
     constructor(HTMLElement, name) {
         this.name = name
         this.HTMLElement = HTMLElement
+        this.HTMLparent = HTMLElement.parentElement
         this.posHome = HTMLElement.getBoundingClientRect()
+        this.display = getComputedStyle(HTMLElement).display
     }
 
     /**
@@ -71,36 +73,47 @@ class MotionObject {
      * @param {_HTMLElement} target 
      */
     torpedo(target) {
-        this.HTMLElement.style.transition = "2s ease-in, transform 0.5s ease"
-        this.HTMLElement.style.transform = `translate(-50%,-50%) rotate(0deg)`
-        this.HTMLElement.style.position = "absolute"
-        this.HTMLElement.setAttribute("name", this.name)
+        let s = () => this.HTMLElement.style
+        s().transition = '2s ease-in, transform 0.5s ease'
+        s().transform = `translate(-50%,-50%) rotate(0deg)`
+        s().position = 'absolute'
+        this.HTMLElement.setAttribute('name', this.name)
         this.targetDim = target.getBoundingClientRect()
         this.pos = true
         this.posX = Math.floor(this.pos.x + this.HTMLElement.width / 2)
         this.posY = Math.floor(this.pos.y + this.HTMLElement.height / 2)
-        this.HTMLElement.style.left = this.pos.x + "px"
-        this.HTMLElement.style.top = this.pos.y + "px"
+        s().left = this.pos.x + 'px'
+        s().top = this.pos.y + 'px'
 
         let targetD = this.targetDim,
             targetPosX = Math.floor(targetD.x + targetD.width / 2),
             targetPosY = Math.floor(targetD.y + targetD.height / 2),
             rad = Math.atan2(targetD.x - this.pos.x, targetD.y - this.pos.y),
-            rotation = (rad * (180 / Math.PI) * -1) + 180;
+            rotation = (rad * (180 / Math.PI) * -1) + 180
+        console.log(rad)
 
         this.pos = true
         this.rotate(rotation)
-        this.HTMLElement.style.left = Math.floor(targetPosX) + "px"
-        this.HTMLElement.style.top = Math.floor(targetPosY) + "px"
+        s().left = Math.floor(targetPosX) + "px"
+        s().top = Math.floor(targetPosY) + "px"
 
         this.HTMLElement.addEventListener('transitionend', MotionObject.explodeAnimate)
     }
 
     getBackHome() {
-        this.HTMLElement.style.left = this.posHome.x
-        this.HTMLElement.style.top = this.posHome.y
-        this.HTMLElement.style.display = "block"
+        let ele = this.HTMLElement
+        ele.style.left = this.posHome.x
+        ele.style.top = this.posHome.y
+        ele.style.transform = 'none'
 
+        ele.getOffsetWidth
+        ele.style.display = this.display
+        ele.style.position = 'relative'
+    }
+
+    getBack() {
+        this.HTMLElement.removeAttribute('style')
+        this.HTMLparent.prepend(this.HTMLElement)
     }
 
     static cpt = 0
@@ -112,11 +125,9 @@ class MotionObject {
     static explodeAnimate(e) {
         // comment faire boum !?
         e.stopPropagation()
-        if (e.propertyName == "transform" || e.propertyName == "left" ){
-        console.log(e, ++(MotionObject.cpt))
-        MotionObject.boom(this)
-    }else{
-        console.log("end")
+        if (e.propertyName == "transform" || e.propertyName == "left") {
+            MotionObject.boom(this)
+        } else {
             this.removeEventListener('transitionend', MotionObject.explodeAnimate)
         }
     }
@@ -150,7 +161,13 @@ class MotionObject {
         boom.addEventListener('transitionend', function (e) {
             e.stopPropagation()
             if (e.propertyName !== "transform") {
-                MotionObject.place(this, MotionObject.objSet[HTMLElement.getAttribute('name')].targetDim)
+                MotionObject.place(
+                    this,
+                    MotionObject.objSet[HTMLElement.getAttribute('name')]
+                        ? MotionObject.objSet[HTMLElement.getAttribute('name')].targetDim
+                        : HTMLElement.getBoundingClientRect()
+                )
+
                 this.remove()
             }
         })
@@ -162,10 +179,10 @@ class MotionObject {
      * @param {Function} targetElementDim wait HTMLDivElement.getBoundingClientRect
      */
     static place(element, targetElementDim, hidden = false) {
-        if(hidden){
+        if (hidden) {
             element.style.display = "none"
             element.offsetHeight
-        } 
+        }
         element.style.left = targetElementDim.x - Math.floor(targetElementDim.width / 2) + "px"
         element.style.top = targetElementDim.y - Math.floor(targetElementDim.height / 2) + "px"
         hidden ? element.style.display = "block" : null
