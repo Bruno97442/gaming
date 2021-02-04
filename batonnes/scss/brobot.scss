@@ -162,9 +162,12 @@ $null: $nul;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         text-align: center;
-        div {
-            font-size: 4rem;
-        }
+    
+    }
+    &-msg{
+        font-size: 4rem;
+        pointer-events: none;
+        user-select: none;
     }
 }
 

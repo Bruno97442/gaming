@@ -128,7 +128,7 @@ class JeuxDesBatons {
                 ia: form.ia.checked
             },
             vueBatons: IfBatons3d,
-            vue3d: form._3d.checked ?? false
+            vue3d: form._3d ? form._3d.checked ?? false : ''
         })
 
         form.reset()

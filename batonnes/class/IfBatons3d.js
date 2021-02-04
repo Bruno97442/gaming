@@ -116,8 +116,8 @@ class IfBatons3d {
         let { pioche, dom, infoBatonHover, infoBaton, piocher } = this
 
 
-        let interactBation = dom.filter((baton, i, tab) => pioche.some(p => p === (tab.length - +baton.classList[0].substr(1) + 1)))
-        interactBation.forEach(baton => {
+        this.interactBatons = dom.filter((baton, i, tab) => pioche.some(p => p === (tab.length - +baton.classList[0].substr(1) + 1)))
+        this.interactBatons.forEach(baton => {
             infoBaton(baton)
             infoBatonHover(baton)
             // POUR LES HOVERS INTERACT
@@ -176,12 +176,14 @@ class IfBatons3d {
 
 
     piocher() {
-        let { dom, nombre, infoBaton } = IfBatons3d.getInstance(),
-            posEle = parseInt(this.classList[0].substr(1)),
-            pos = nombre - posEle + 1,
-            lesPioches = dom.filter((x, j) => j >= nombre - pos),
-            duration = 0.3
-        // si correspond choix de pioche
+        let { dom, nombre, infoBaton, interactBatons, piocher } = IfBatons3d.getInstance(),
+        posEle = parseInt(this.classList[0].substr(1)),
+        pos = nombre - posEle + 1,
+        lesPioches = dom.filter((x, j) => j >= nombre - pos),
+        duration = 0.3
+        
+        interactBatons.forEach(baton => baton.removeEventListener('click', piocher))
+        
         lesPioches.forEach((ele, i) => {
             ele.classList.add('goOut')
             ele.style.animationDuration = duration + 's'

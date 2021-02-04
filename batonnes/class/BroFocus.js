@@ -24,8 +24,8 @@ class BroFocus {
         }
         this.focusSign
         this.name = name
-        // this.sound.shoot = new Audio('sound/tire.mp3')
-        // this.sound.shoot.volume = 0.2
+        this.sound.shoot = new Audio('sound/tire.mp3')
+        this.sound.shoot.volume = 0.2
 
     }
     // design staff
